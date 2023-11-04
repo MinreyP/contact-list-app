@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <footer>
+        <footer className="footer">
             <p>A Take-home Challenge Made by Minrey Peng ✌🏻</p>
         </footer>
     )

@@ -1,0 +1,13 @@
+.list {
+    display: grid;
+    width: 100%;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+}
+
+.btngroup {
+    display: flex;
+    width: 100%;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}

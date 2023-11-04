@@ -1,0 +1,40 @@
+.layer {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    color: var(--theme-black);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 1;
+    transition: all .6s ease-out;
+    visibility: visible;
+}
+
+.status {
+    font-size: 1.25rem;
+}
+
+.close {
+    margin-top: 1rem;
+    font-size: .95rem;
+    color: var(--theme-blue);
+    text-decoration: underline;
+    transition: all .3s ease-in;
+}
+
+.close:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+.remove {
+    opacity: 0;
+    visibility: hidden;
+}
