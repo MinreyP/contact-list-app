@@ -1,0 +1,3 @@
+Quiz: Which one of the 2 is a better way to code the component? Why?
+
+A: Code 1 is better. In this scenario where animals could be a very long array, Code 2 could potentially lead to increased memory usage and decreased responsiveness by adding to many event listeners. Code 1 is using a practice called event delegation. Instead of attaching an event listener to each individual item in the list, you can attach a single event listener to a parent element that contains all the items, which is more efficient for handling events on a large number of elements.
