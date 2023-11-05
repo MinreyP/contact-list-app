@@ -1,7 +1,7 @@
 # Take-home Challenge: Contact List App
 ## Getting Started
 
-First thing first, make sure you've clone the back-end code base to your local machine, so we can run the whole contact list app locally:
+First thing first, make sure you've cloned the back-end code base to your local machine so we can run the whole contact list app locally:
 [Clone the back-end repo](https://github.com/resumecompanion/taroko_server.git)
 
 At the back-end folder, run
