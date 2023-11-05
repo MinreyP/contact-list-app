@@ -15,8 +15,34 @@
   max-width: 25em;
 }
 
-.wrapper {
-  width: 300px;
-  height: 300px;
-  position: relative;
+
+
+.info h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.info button {
+  display: block;
+  margin: 2rem auto 0 auto;
+}
+
+@media screen and (min-width: 960px) {
+  .index {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .info h1 {
+    font-size: 2rem;
+    text-align: unset;
+  }
+
+  .info button {
+    margin: unset;
+    margin-top: 2rem;
+  }
 }

@@ -11,7 +11,9 @@ async function AllContacts() {
     return (
         <main className={styles.main}>
             <h2>All Contacts Page</h2>
-            <button className="btn"><Link href="/contacts/add">Add Contacts</Link></button>
+            <Link href="/contacts/add">
+                <button className="btn">Add Contacts</button>
+            </Link>
             <List contacts={data} />
         </main>
     )
