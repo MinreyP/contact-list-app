@@ -1,0 +1,85 @@
+.form {
+    width: 100%;
+    max-width: 320px;
+    padding: 2rem;
+    margin-top: 4rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff;
+    position: absolute;
+}
+
+.group {
+    width: 100%;
+    display: flex;
+    gap: .5rem;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.set {
+    width: 100%;
+    flex: 1 1 50%;
+}
+
+.set input,
+.set label {
+    display: block;
+    width: 100%;
+}
+
+.set label {
+    margin-bottom: .2em;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.set label span {
+    font-style: italic;
+    font-size: .8rem;
+    font-weight: 400;
+    opacity: .8;
+}
+
+.set input {
+    padding: .5em;
+    font-size: 1rem;
+    font-weight: 400;
+    border: 1px solid #cccccc;
+    transition: border-color 0.3s ease;
+}
+
+.set input:focus {
+    border-color: var(--theme-blue);
+}
+
+.set input:invalid {
+    border-color: var(--theme-red);
+}
+
+.formbuttons {
+    margin-top: 2rem;
+    width: 80%;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.formbuttons button {
+    flex: 1 1 50%;
+}
+
+.cancel {
+    color: var(--theme-red);
+    border-color: var(--theme-red);
+}
+
+@media screen and (min-width: 960px) {
+    .form {
+        max-width: 520px;
+    }
+}
