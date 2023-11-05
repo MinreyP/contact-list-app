@@ -29,6 +29,9 @@ export async function getSingleContact(id: string) {
 export async function createNewContact(body: {}) {
     const options = {
         method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(body)
     };
 
@@ -54,6 +57,9 @@ export async function createNewContact(body: {}) {
 export async function updateContact(body: {}, id: string) {
     const options = {
         method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(body)
     };
 

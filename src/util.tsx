@@ -7,8 +7,8 @@ type Contact = {
 }
 
 export function generateProfileIcon(firstName: string, lastName: string) {
-    const firstInitial = firstName.charAt(0);
-    const secondInitial = lastName.charAt(0);
+    const firstInitial = firstName.charAt(0).toUpperCase();
+    const secondInitial = lastName.charAt(0).toUpperCase();
     return [firstInitial, secondInitial]
 }
 

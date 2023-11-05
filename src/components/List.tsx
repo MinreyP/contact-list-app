@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from './List.module.css';
 import Card from '@/components/Card'
 import { sortArrayByFirstLetter } from '@/util';
+import { revalidateContacts } from '@/actions';
 
 type Contact = {
     id: number;
@@ -19,6 +20,10 @@ type ListProps = {
 function List({ contacts }: ListProps) {
     const [sortMode, setSortMode] = useState('');
     const [dataSorted, setDataSorted] = useState<Contact[]>([]);
+
+    useEffect(() => {
+        revalidateContacts();
+    }, [])
 
     useEffect(() => {
         if (sortMode === 'asc') {

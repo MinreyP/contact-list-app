@@ -35,10 +35,10 @@ function Form({ contact }: FormProps) {
             const apiBody = { info: { ...formContact } }
             const res = await updateContact(apiBody, `${contact?.id}`);
             if (res) {
-                revalidateContacts()
-                setUpdateResult(true)
+                revalidateContacts();
+                setUpdateResult(true);
             }
-            setOpenMessage(true)
+            setOpenMessage(true);
         }
         if (formMode === 'add') {
             // post api
@@ -46,9 +46,16 @@ function Form({ contact }: FormProps) {
             const res = await createNewContact(apiBody);
             console.log(res);
             if (res) {
-                revalidateContacts()
+                setUpdateResult(true);
+                revalidateContacts();
             }
-            setOpenMessage(true)
+            setOpenMessage(true);
+            setFormContact({
+                first_name: '',
+                last_name: '',
+                job: '',
+                description: '',
+            })
         }
     }
 

@@ -1,11 +1,10 @@
 import styles from '@/app/page.module.css';
 import Link from 'next/link';
-import { getContacts, revalidateContacts } from '@/actions';
+import { getContacts } from '@/actions';
 import List from '@/components/List';
 
 async function AllContacts() {
     const res = await getContacts();
-    revalidateContacts();
     const { data } = res;
 
     return (
