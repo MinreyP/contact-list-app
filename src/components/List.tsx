@@ -17,15 +17,22 @@ type ListProps = {
     contacts: Contact[]
 }
 
+enum SortMode {
+    Asc = 'asc',
+    Desc = 'desc'
+}
+
 function List({ contacts }: ListProps) {
-    const [sortMode, setSortMode] = useState('');
+    const [sortMode, setSortMode] = useState<SortMode | ''>('');
     const [dataSorted, setDataSorted] = useState<Contact[]>([]);
 
     useEffect(() => {
+        console.log('revalidate contacts called');
         revalidateContacts();
     }, [])
 
     useEffect(() => {
+        console.log('Rerendered: Contacts, Sortmode changed');
         if (sortMode === 'asc') {
             setDataSorted(sortArrayByFirstLetter(contacts, 'asc'));
         } else if (sortMode === 'desc') {
@@ -38,8 +45,8 @@ function List({ contacts }: ListProps) {
     return (
         <>
             <div className={styles.btngroup}>
-                <button className={`btn toggle ${sortMode === 'asc' ? 'selected' : ''}`} onClick={() => setSortMode('asc')}>Sort A-Z</button>
-                <button className={`btn toggle ${sortMode === 'desc' ? 'selected' : ''}`} onClick={() => setSortMode('desc')}>Sort Z-A</button>
+                <button className={`btn toggle ${sortMode === SortMode.Asc ? 'selected' : ''}`} onClick={() => setSortMode(SortMode.Asc)}>Sort A-Z</button>
+                <button className={`btn toggle ${sortMode === SortMode.Desc ? 'selected' : ''}`} onClick={() => setSortMode(SortMode.Desc)}>Sort Z-A</button>
             </div>
             <ul className={styles.list}>
                 {

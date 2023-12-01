@@ -1,9 +1,9 @@
 'use client'
 import styles from './form.module.css'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import { revalidateContacts, createNewContact, updateContact } from '@/actions'
 import Feedback from './Feedback'
+import FormButtons from './FormButtons'
 
 type Contact = {
     id: number;
@@ -118,21 +118,6 @@ function Form({ contact }: FormProps) {
                     (<Feedback result={updateResult} />) : ''
             }
         </form>
-    )
-}
-
-function FormButtons() {
-    const router = useRouter();
-
-    return (
-        <div className={styles.formbuttons}>
-            <button className={`btn ${styles.cancel}`} type="button" onClick={() => router.push('/contacts')}>
-                Cancel
-            </button>
-            <button className={'btn'} type="submit" aria-disabled={false}>
-                Submit
-            </button>
-        </div>
     )
 }
 
