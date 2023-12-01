@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache"
 const api_base = 'http://localhost:3000/api';
 
 export async function getContacts() {
-    const res = await fetch(`${api_base}/contacts`, { next: { tags: ['contacts'] } });
+    revalidateContacts();
+    const res = await fetch(`${api_base}/contacts`);
     if (!res.ok) {
         throw new Error('Failed to fetch contacts')
     }
@@ -18,7 +19,7 @@ export async function revalidateContacts() {
 }
 
 export async function getSingleContact(id: string) {
-    const res = await fetch(`${api_base}/contacts/${id}`, { next: { tags: ['contact'] } });
+    const res = await fetch(`${api_base}/contacts/${id}`);
     if (!res.ok) {
         throw new Error('Failed to fetch contacts')
     }

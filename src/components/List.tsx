@@ -1,9 +1,8 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './List.module.css';
 import Card from '@/components/Card'
 import { sortArrayByFirstLetter } from '@/util';
-import { revalidateContacts } from '@/actions';
 
 type Contact = {
     id: number;
@@ -24,36 +23,35 @@ enum SortMode {
 
 function List({ contacts }: ListProps) {
     const [sortMode, setSortMode] = useState<SortMode | ''>('');
-    const [dataSorted, setDataSorted] = useState<Contact[]>([]);
+    const [contactsData, setContactsData] = useState<Contact[]>(contacts);
 
-    useEffect(() => {
-        console.log('revalidate contacts called');
-        revalidateContacts();
-    }, [])
+    console.log('List compo init');
 
-    useEffect(() => {
-        console.log('Rerendered: Contacts, Sortmode changed');
-        if (sortMode === 'asc') {
-            setDataSorted(sortArrayByFirstLetter(contacts, 'asc'));
-        } else if (sortMode === 'desc') {
-            setDataSorted(sortArrayByFirstLetter(contacts, 'desc'));
-        } else {
-            setDataSorted([]);
-        }
-    }, [contacts, sortMode]);
+    function handleSort(mode: SortMode) {
+        setSortMode(mode);
+        setContactsData((prevContacts) => {
+            console.log('sort mode called');
+            const sortedContacts = sortArrayByFirstLetter(prevContacts, mode);
+            return [...sortedContacts];
+        })
+    }
 
     return (
         <>
             <div className={styles.btngroup}>
-                <button className={`btn toggle ${sortMode === SortMode.Asc ? 'selected' : ''}`} onClick={() => setSortMode(SortMode.Asc)}>Sort A-Z</button>
-                <button className={`btn toggle ${sortMode === SortMode.Desc ? 'selected' : ''}`} onClick={() => setSortMode(SortMode.Desc)}>Sort Z-A</button>
+                <button className={`btn toggle ${sortMode === SortMode.Asc ? 'selected' : ''}`}
+                    onClick={() => handleSort(SortMode.Asc)}
+                >Sort A-Z</button>
+                <button className={`btn toggle ${sortMode === SortMode.Desc ? 'selected' : ''}`}
+                    onClick={() => handleSort(SortMode.Desc)}
+                >Sort Z-A</button>
             </div>
             <ul className={styles.list}>
                 {
-                    dataSorted.length > 0 ? (
-                        dataSorted.map((contact: Contact) => <Card key={contact.id} contact={contact} />)
+                    contactsData.length !== 0 ? (
+                        contactsData.map((contact: Contact) => <Card key={contact.id} contact={contact} />)
                     ) : (
-                        contacts.map((contact: Contact) => <Card key={contact.id} contact={contact} />)
+                        `Boohoo You don't have any contact`
                     )
                 }
             </ul>
