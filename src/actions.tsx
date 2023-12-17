@@ -92,3 +92,34 @@ export async function deleteContact(id: string) {
 
     return res.json()
 }
+
+export async function handleForm(prevState: any, queryData: FormData) {
+    let nextState = { status: false, message: 'failed to update. try again later.' };
+    const formMode = queryData.get('form_mode');
+    const contactId = queryData.get('contact_id');
+    const formBody = {
+        first_name: queryData.get('first_name'),
+        last_name: queryData.get('last_name'),
+        job: queryData.get('job'),
+        description: queryData.get('description'),
+    }
+    if (formMode === 'edit') {
+        const apiBody = { info: { ...formBody } }
+        const res = await updateContact(apiBody, `${contactId}`);
+        if (res) {
+            console.log(`${formMode}:'Form Submit Successfully`);
+            nextState = { status: true, message: 'sucessfully updated the contact' };
+            revalidateContacts();
+        }
+    }
+    if (formMode === 'add') {
+        const apiBody = { contact: { ...formBody } };
+        const res = await createNewContact(apiBody);
+        if (res) {
+            console.log(`${formMode}:'Form Submit Successfully`);
+            nextState = { status: true, message: 'sucessfully added a contact' }
+            revalidateContacts();
+        }
+    }
+    return nextState;
+}
