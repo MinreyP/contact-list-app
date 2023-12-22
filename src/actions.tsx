@@ -5,8 +5,7 @@ import { revalidatePath } from "next/cache";
 const api_base = 'http://localhost:3000/api';
 
 export async function getContacts() {
-    revalidateContacts();
-    const res = await fetch(`${api_base}/contacts`);
+    const res = await fetch(`${api_base}/contacts`, { cache: 'no-store' });
     if (!res.ok) {
         throw new Error('Failed to fetch contacts')
     }
@@ -87,8 +86,9 @@ export async function updateContact(body: {}, id: string) {
 export async function deleteContact(id: string) {
     const res = await fetch(`${api_base}/contacts/${id}`, { method: 'DELETE' });
     if (!res.ok) {
-        throw new Error('Failed to fetch contacts')
+        throw new Error('Failed to fetch contacts');
     }
+    revalidateContacts();
     return res.json()
 }
 
