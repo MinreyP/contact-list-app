@@ -1,10 +1,8 @@
 'use client'
 import styles from './card.module.css'
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { generateProfileIcon } from '@/util';
+import { useRouter } from 'next/navigation'
 import { deleteContact } from '@/actions';
-import Feedback from './Feedback';
 
 type Contact = {
     id: number;
@@ -19,21 +17,15 @@ type CardProps = {
 }
 
 function Card({ contact }: CardProps) {
-    const { id, first_name, last_name, job, description } = contact;
-    const [openMessage, setOpenMessage] = useState(false);
-    const [updateResult, setUpdateResult] = useState(false);
     const router = useRouter();
+    const { id, first_name, last_name, job, description } = contact;
     const contactInitial = generateProfileIcon(first_name, last_name);
 
     async function handleDelete(id: string) {
         const res = await deleteContact(id);
         console.log(res);
-
-        if (res.statusCode === 200) {
-            setOpenMessage(true);
-            setUpdateResult(true);
-        } else {
-            setOpenMessage(true);
+        if (res) {
+            window.location.reload();
         }
     }
 
@@ -56,10 +48,6 @@ function Card({ contact }: CardProps) {
                         Delete
                     </button>
                 </div>
-                {
-                    openMessage ?
-                        (<Feedback result={updateResult} />) : ''
-                }
             </li>
         </>
     )

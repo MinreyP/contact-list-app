@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from "next/cache"
+import { revalidatePath } from "next/cache";
 
 const api_base = 'http://localhost:3000/api';
 
@@ -19,7 +19,7 @@ export async function revalidateContacts() {
 }
 
 export async function getSingleContact(id: string) {
-    const res = await fetch(`${api_base}/contacts/${id}`);
+    const res = await fetch(`${api_base}/contacts/${id}`, { cache: 'no-store' });
     if (!res.ok) {
         throw new Error('Failed to fetch contacts')
     }
@@ -89,7 +89,6 @@ export async function deleteContact(id: string) {
     if (!res.ok) {
         throw new Error('Failed to fetch contacts')
     }
-
     return res.json()
 }
 

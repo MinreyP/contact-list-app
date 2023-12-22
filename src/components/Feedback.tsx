@@ -1,5 +1,6 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useRouter } from 'next/navigation'
 import Image from "next/image"
 import styles from "./feedback.module.css"
 
@@ -9,12 +10,12 @@ type FeedbackProps = {
 }
 
 function Feedback({ result, message }: FeedbackProps) {
-    const [visable, setVisable] = useState(true);
+    const router = useRouter();
     const imgURL = result === true ? '/sucess_illustration.jpeg' : '/err_illustration.png';
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setVisable(false);
+            router.push('/contacts')
         }, 3000)
 
         return () => {
@@ -23,7 +24,7 @@ function Feedback({ result, message }: FeedbackProps) {
     }, []);
 
     return (
-        <div className={`${styles.layer} ${visable === false && (styles.remove)}`}>
+        <div className={`${styles.layer}`}>
             <Image
                 src={imgURL}
                 width={130}
@@ -38,7 +39,7 @@ function Feedback({ result, message }: FeedbackProps) {
             <p className={styles.msg}>
                 {message}
             </p>
-            <p className={styles.close} onClick={() => setVisable(false)}>Close</p>
+            <p className={styles.close} onClick={() => router.push('/contacts')}>Close</p>
         </div>
     )
 }
